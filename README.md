@@ -10,7 +10,7 @@ Linux support is still in progress. Windows and 32 bit support is also planned.
 
 ## Example code
 
-```
+```c
 #include <stdio.h>
 #include <SCL/SCL.h>
 
