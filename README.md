@@ -4,9 +4,6 @@
 SCL is a C implementation of coroutines.  
 This is still work in progress, expect your code to break.
 
-As of now, only x86_64 with SystemV calling convention is supported (read: 64 bits Mac OS X, Linux and BSD).
-
-Linux support is still in progress. Windows and 32 bit support is also planned.
 
 ## Example code
 
