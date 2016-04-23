@@ -62,7 +62,6 @@ sudo ninja install
 ## Known issues
 
  * Coroutines can't be resumed from other threads. This is a design choice and won't be fixed.
- * Code that depends on CPU flags will break coroutines. Fix in progress.
 
 ## License
 

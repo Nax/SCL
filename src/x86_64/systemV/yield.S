@@ -2,6 +2,7 @@
 .global _SCL_GetActiveCoroutine
 
 _SCL_Yield:
+    pushfq
     pushq %rax
     callq _SCL_GetActiveCoroutine
     addq $8, %rax
@@ -11,10 +12,13 @@ _SCL_Yield:
     /* Push the return addr */
     pushq %rbx
     /* Push the stored rax */
-    movq -16(%rsp), %rbx
+    movq 16(%rsp), %rbx
     movq %rbx, 0x00(%rax)
+    /* Push the flags */
+    movq 24(%rsp), %rbx
+    mov %rbx, 0x80(%rax)
     popq %rbx
-    add $8, %rsp
+    add $16, %rsp
 
     mov %rbx, 0x08(%rax)
     mov %rcx, 0x10(%rax)
