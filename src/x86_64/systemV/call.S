@@ -32,6 +32,9 @@ _SCL_CallNew:
  * rdi - The state ptr
  */
 _SCL_CallResume:
+    mov $1, %rax
+    fxrstor64 0x88(%rdi)
+    
     movq %rdi, %rax
     movq 0x8(%rax), %rbx
     movq 0x10(%rax), %rcx

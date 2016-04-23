@@ -42,19 +42,22 @@ SCL_API SCL_Status SCL_Call(SCL_Coroutine* coroutine)
     SCL_Status status = coroutine->status;
     int ret;
 
+    if (status == SCL_STATUS_FINISHED)
+        return status;
+
     active_coroutine = coroutine;
 
     if (status == SCL_STATUS_NEW)
     {
         ret = SCL_CallNew(coroutine->routine, coroutine->param, coroutine->stack_top);
-        if (ret)
-            coroutine->status = SCL_STATUS_FINISHED;
-        else
-            coroutine->status = SCL_STATUS_IDLE;
     }
-    else if (status == SCL_STATUS_IDLE)
+    else
     {
         ret = SCL_CallResume(&coroutine->state);
     }
+    if (ret)
+        coroutine->status = SCL_STATUS_FINISHED;
+    else
+        coroutine->status = SCL_STATUS_IDLE;
     return coroutine->status;
 }

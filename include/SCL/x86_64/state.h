@@ -21,6 +21,8 @@ struct SCL_State_
     uint64_t    r13;
     uint64_t    r14;
     uint64_t    r15;
+    char        padding[8];
+    char        fxsave[512];
 };
 
 #endif

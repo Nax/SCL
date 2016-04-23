@@ -32,7 +32,11 @@ _SCL_Yield:
     mov %r14, 0x70(%rax)
     mov %r15, 0x78(%rax)
 
-    mov -8(%rax), %rax
+    mov %rax, %rdi
+    mov $1, %rax
+    fxsave64 0x88(%rdi)
+
+    mov -8(%rdi), %rax
 
     movq -16(%rax), %rsp
     movq -8(%rax), %rbp
