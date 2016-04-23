@@ -19,5 +19,9 @@ int main()
     SCL_Call(coroutine);
     printf("Between coroutine calls. (again)\n");
     SCL_Call(coroutine);
+    SCL_Reset(coroutine);
+    SCL_Call(coroutine);
+    SCL_Call(coroutine);
+    SCL_DestroyCoroutine(coroutine);
     return 0;
 }

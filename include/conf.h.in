@@ -1,0 +1,7 @@
+#ifndef SCL_CONF_H
+#define SCL_CONF_H
+
+#define SCL_ARCH @SCL_ARCH@
+#define SCL_STATE_PATH <SCL/@SCL_ARCH@/state.h>
+
+#endif
