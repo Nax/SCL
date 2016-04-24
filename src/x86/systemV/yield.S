@@ -11,10 +11,10 @@ _SCL_Yield:
 
     push %ebx
     /* Push the stored rax */
-    movl 8(%esp), %ebx
+    movl 0x04(%esp), %ebx
     movl %ebx, 0x00(%eax)
     /* Push the flags */
-    mov 12(%esp), %ebx
+    mov 0x08(%esp), %ebx
     mov %ebx, 0x20(%eax)
     pop %ebx
     add $8, %esp
@@ -35,5 +35,9 @@ _SCL_Yield:
 
     mov -8(%eax), %esp
     mov -4(%eax), %ebp
+
+    popa
     xor %eax, %eax
+    movl %ebp, %esp
+    pop %ebp
     ret

@@ -34,7 +34,7 @@ add_library(SCL SHARED ${SRC})
 add_library(SCL-static STATIC ${SRC})
 set_target_properties(SCL-static PROPERTIES OUTPUT_NAME SCL)
 
-add_executable(example example/main.c)
+add_executable(example example/main.cpp)
 target_link_libraries(example SCL)
 
 install(TARGETS SCL SCL-static DESTINATION lib)

@@ -3,17 +3,21 @@
 
 /*
  * Params :
- * 4(esp)   - The routine
- * 8(esp)   - The param
- * 12(esp)  - The stack
+ * 8(ebp)   - The routine
+ * 12(ebp)   - The param
+ * 16(ebp)  - The stack
  */
 _SCL_CallNew:
-    movl 12(%esp), %ecx
+    push %ebp
+    movl %esp, %ebp
+    pusha
+
+    movl 16(%ebp), %ecx
     movl %ebp, -4(%ecx)
     movl %esp, -8(%ecx)
 
-    movl  4(%esp), %eax
-    movl  8(%esp), %edx
+    movl  8(%ebp), %eax
+    movl  12(%ebp), %edx
 
     movl %ecx, %ebp
     sub $8, %ebp
@@ -27,16 +31,22 @@ _SCL_CallNew:
     movl 0(%ebp), %esp
     movl 4(%ebp), %ebp
 
+    popa
     movl $1, %eax
-    
+    mov %ebp, %esp
+    pop %ebp
     ret
 
 /*
  * Params :
- * 4(esp) - The state ptr
+ * 8(ebp) - The state ptr
  */
 _SCL_CallResume:
-    movl 4(%esp), %edi
+    push %ebp
+    mov %esp, %ebp
+    pusha
+
+    movl 8(%ebp), %edi
     movl 0x20(%edi), %eax
     push %eax
     popf

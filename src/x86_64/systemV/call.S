@@ -33,8 +33,8 @@ _SCL_CallNew:
  */
 _SCL_CallResume:
     movq 0x80(%rdi), %rax
-    pushq %rax
-    popfq
+    push %rax
+    popf
     
     mov $1, %rax
     fxrstor64 0x88(%rdi)
