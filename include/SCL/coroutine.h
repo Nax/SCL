@@ -24,12 +24,14 @@ struct SCL_Coroutine_
 
 typedef struct SCL_Coroutine_ SCL_Coroutine;
 
+SCL_API void            SCL_InitCoroutine(SCL_Coroutine* coroutine, SCL_Routine routine, void* param, size_t stak_size);
 SCL_API SCL_Coroutine*  SCL_CreateCoroutine(SCL_Routine routine, void* param, size_t stak_size);
 SCL_API SCL_Status      SCL_GetStatus(SCL_Coroutine* coroutine);
 SCL_API void*           SCL_GetParam(SCL_Coroutine* coroutine);
 SCL_API SCL_Status      SCL_Call(SCL_Coroutine* coroutine);
 SCL_API void            SCL_Reset(SCL_Coroutine* coroutine);
 SCL_API void            SCL_RecreateCoroutine(SCL_Coroutine* coroutine, SCL_Routine routine, void* param, size_t stack_size);
+SCL_API void            SCL_DeinitCoroutine(SCL_Coroutine* coroutine);
 SCL_API void            SCL_DestroyCoroutine(SCL_Coroutine* coroutine);
 
 #endif

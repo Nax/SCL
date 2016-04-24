@@ -11,11 +11,8 @@ SCL_API SCL_Coroutine* SCL_GetActiveCoroutine()
     return active_coroutine;
 }
 
-SCL_API SCL_Coroutine* SCL_CreateCoroutine(SCL_Routine routine, void* param, size_t stack_size)
+SCL_API void SCL_InitCoroutine(SCL_Coroutine* coroutine, SCL_Routine routine, void* param, size_t stack_size)
 {
-    SCL_Coroutine* coroutine;
-
-    coroutine = malloc(sizeof(SCL_Coroutine));
     coroutine->routine = routine;
     coroutine->param = param;
     if (stack_size == 0)
@@ -24,6 +21,14 @@ SCL_API SCL_Coroutine* SCL_CreateCoroutine(SCL_Routine routine, void* param, siz
     coroutine->stack = malloc(stack_size);
     coroutine->stack_top = (void*)((char*)coroutine->stack + stack_size);
     coroutine->status = SCL_STATUS_NEW;
+}
+
+SCL_API SCL_Coroutine* SCL_CreateCoroutine(SCL_Routine routine, void* param, size_t stack_size)
+{
+    SCL_Coroutine* coroutine;
+
+    coroutine = malloc(sizeof(SCL_Coroutine));
+    SCL_InitCoroutine(coroutine, routine, param, stack_size);
     return coroutine;
 }
 
@@ -77,6 +82,11 @@ SCL_API void SCL_RecreateCoroutine(SCL_Coroutine* coroutine, SCL_Routine routine
     coroutine->stack = realloc(coroutine->stack, stack_size);
     coroutine->stack_size = stack_size;
     coroutine->stack_top = (void*)((char*)coroutine->stack + stack_size);
+}
+
+SCL_API void SCL_DeinitCoroutine(SCL_Coroutine* coroutine)
+{
+    free(coroutine->stack);
 }
 
 SCL_API void SCL_DestroyCoroutine(SCL_Coroutine* coroutine)
